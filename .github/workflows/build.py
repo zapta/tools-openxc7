@@ -122,7 +122,7 @@ def write_parts_index(package_dir: Path, upstream_inventory_json: Path) -> None:
         fpgas_dict[fpga_id] = fpga_definition
 
     # -- Sanity check that we generate a sufficient number of parts.
-    print(f"Generated: {len(fpgas_dict)}, skipped {skipped_count} parts.")
+    print(f"Generated: {len(fpgas_dict)}, skipped {len(skipped)} parts.")
     assert len(fpgas_dict) > 100, len(fpgas_dict)
 
     # -- Construct metadata section.
