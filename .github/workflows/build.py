@@ -153,9 +153,10 @@ def write_parts_index(package_dir: Path, upstream_inventory_json: Path) -> None:
     file_text = "\n".join(prefix_lines) + "\n" + json.dumps(fpgas_dict, indent=2) + "\n"
 
     # -- Write the fpga index to the package.
-    index_path = package_dir / "definitions" / "fpgas.jsonc"
-    print(f"Writing file {str(index_path)}")
-    with index_path.open("w") as f:
+    file_path = package_dir / "definitions" / "fpgas.jsonc"
+    print(f"Writing file {str(file_path)}")
+    file_path.parent.mkdir()
+    with file_path.open("w") as f:
         f.write(file_text)
 
 
