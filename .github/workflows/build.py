@@ -143,7 +143,7 @@ def write_parts_index(package_dir: Path, upstream_inventory_json: Path) -> None:
 
     prefix_lines = [
         "// Automatically generated, do not edit!",
-        "// Base FPGAs definitions for the Apio 'xilinx' architecture.",
+        "// Base FPGAs definitions for the Apio's 'xilinx' architecture.",
         "//",
         f"// Generated :  {len(fpgas_dict)}",
         f"// Skipped   :  {skipped_count}",
