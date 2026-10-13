@@ -95,7 +95,7 @@ def write_parts_index(package_dir: Path, upstream_inventory_json: Path) -> None:
     ]
 
     # -- Construct the parts entries based on the upstream repository.
-    skipped_count = 0
+    skipped = []
     fpgas_dict: dict[str, dict] = {}
     for part_id, part_info in upstream_inventory["parts"].items():
         assert isinstance(part_id, str)
@@ -106,7 +106,7 @@ def write_parts_index(package_dir: Path, upstream_inventory_json: Path) -> None:
         assert isinstance(is_generated, bool)
         if not is_generated:
             print(f"skipping non generated fpga: {fpga_id}")
-            skipped_count += 1
+            skipped.append(fpga_id)
 
         # -- Add fpga definition
         fpga_definition = {
@@ -145,13 +145,15 @@ def write_parts_index(package_dir: Path, upstream_inventory_json: Path) -> None:
         "// Automatically generated, do not edit!",
         "// Base FPGAs definitions for the Apio's 'xilinx' architecture.",
         "//",
-        "//  xilinx",
-        f"//   Skipped   :  {skipped_count}",
+        "// xilinx:"
         f"//   Generated :  {len(fpgas_dict)}",
-        "//",
+        f"//   Skipped   :  {len(skipped)}",
     ]
 
-    file_text = "\n".join(prefix_lines) + "\n" + json.dumps(fpgas_dict, indent=2) + "\n"
+    for fpga_id in skipped:
+            prefix_lines.append(f"//     - {fpga_id}")
+
+    file_text = "\n".join(prefix_lines) + "\n//\n" + json.dumps(fpgas_dict, indent=2) + "\n"
 
     # -- Write the fpga index to the package.
     file_path = package_dir / "definitions" / "FPGAS.jsonc"
