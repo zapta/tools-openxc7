@@ -145,7 +145,7 @@ def write_parts_index(package_dir: Path, upstream_inventory_json: Path) -> None:
         "// Automatically generated, do not edit!",
         "// Base FPGAs definitions for the Apio's 'xilinx' architecture.",
         "//",
-        "// xilinx:"
+        "// xilinx:",
         f"//   Generated :  {len(fpgas_dict)}",
         f"//   Skipped   :  {len(skipped)}",
     ]
