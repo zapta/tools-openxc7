@@ -215,14 +215,14 @@ jobs:
           tar czf  _packages/apio-openxc7-windows-amd64-${PACKAGE_TAG}.tgz -C _packages/windows-amd64 .
           ls -al _packages
 
-      - name: Verify that the definitions/FPGAS.jsonc match
+      - name: Verify that the FPGAS.jsonc files match
         run: |
           set -x
-          diff _packages/darwin-arm64/definitions/FPGAS.jsonc \
-               _packages/linux-x86-64/definitions/FPGAS.jsonc
+          diff _packages/darwin-arm64/FPGAS.jsonc \
+               _packages/linux-x86-64/FPGAS.jsonc
 
-          diff _packages/darwin-arm64/definitions/FPGAS.jsonc \
-               _packages/windows-amd64/definitions/FPGAS.jsonc
+          diff _packages/darwin-arm64/FPGAS.jsonc \
+               _packages/windows-amd64/FPGAS.jsonc
 
       - name: List packages
         run: |
@@ -311,5 +311,5 @@ jobs:
             _packages/apio-openxc7-darwin-arm64-${{env.PACKAGE_TAG}}.tgz
             _packages/apio-openxc7-linux-x86-64-${{env.PACKAGE_TAG}}.tgz
             _packages/apio-openxc7-windows-amd64-${{env.PACKAGE_TAG}}.tgz
-            _packages/linux-x86-64/definitions/FPGAS.jsonc
+            _packages/linux-x86-64/FPGAS.jsonc
             BUILD-INFO.json
